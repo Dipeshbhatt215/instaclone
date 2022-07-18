@@ -6,7 +6,7 @@ import 'package:instaclone/providers/search_page_provider.dart';
 import 'package:instaclone/screens/home_page/home_page_main.dart';
 import 'package:instaclone/screens/profile_page/profile_page.dart';
 import 'package:instaclone/screens/reels_page/Reel_page.dart';
-import 'package:instaclone/screens/reels_page/reels_page.dart';
+
 import 'package:instaclone/screens/search_page/search_page.dart';
 import 'package:instaclone/screens/shop_page/shop_page.dart';
 import 'package:instaclone/utils/project_constants.dart';
@@ -36,26 +36,30 @@ class _MainPageState extends State<MainPage> {
             _homeScreen.currentState?.popUntil((route) => route.isFirst);
           } else {
             if (context.read<HomePageProvider>().pageController.page == 1) {
-              context
-                  .read<HomePageProvider>()
-                  .pageController
-                  .animateTo(0, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-            } else if (context.read<HomePageProvider>().mainPostsController.hasClients) {
-              context
-                  .read<HomePageProvider>()
-                  .mainPostsController
-                  .animateTo(0, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+              context.read<HomePageProvider>().pageController.animateTo(0,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeIn);
+            } else if (context
+                .read<HomePageProvider>()
+                .mainPostsController
+                .hasClients) {
+              context.read<HomePageProvider>().mainPostsController.animateTo(0,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeIn);
             }
           }
           break;
         case 1:
           if (_searchScreen.currentState?.canPop() ?? false) {
             _searchScreen.currentState?.popUntil((route) => route.isFirst);
-          } else if (context.read<SearchPageProvider>().searchPostsController.hasClients) {
-            context
-                .read<SearchPageProvider>()
-                .searchPostsController
-                .animateTo(0, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+          } else if (context
+              .read<SearchPageProvider>()
+              .searchPostsController
+              .hasClients) {
+            context.read<SearchPageProvider>().searchPostsController.animateTo(
+                0,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeIn);
           }
 
           break;
@@ -69,11 +73,16 @@ class _MainPageState extends State<MainPage> {
           if (_profileScreen.currentState?.canPop() ?? false) {
             _profileScreen.currentState?.popUntil((route) => route.isFirst);
           } else {
-            if (context.read<ProfilePageProvider>().userProfileScrollController.hasClients) {
+            if (context
+                .read<ProfilePageProvider>()
+                .userProfileScrollController
+                .hasClients) {
               context
                   .read<ProfilePageProvider>()
                   .userProfileScrollController
-                  .animateTo(0, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+                  .animateTo(0,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn);
             }
           }
           break;
@@ -90,7 +99,8 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     Color primaryColor = ProjectConstants.getPrimaryColor(context, false);
-    Color primaryColorReversed = ProjectConstants.getPrimaryColor(context, true);
+    Color primaryColorReversed =
+        ProjectConstants.getPrimaryColor(context, true);
 
     return Scaffold(
       body: IndexedStack(
@@ -114,7 +124,7 @@ class _MainPageState extends State<MainPage> {
             key: _reelsScreen,
             onGenerateRoute: (route) => MaterialPageRoute(
               settings: route,
-              builder: (context) =>  ReelPage(),
+              builder: (context) => ReelPage(),
             ),
           ),
           Navigator(
