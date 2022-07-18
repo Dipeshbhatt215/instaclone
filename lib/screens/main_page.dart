@@ -5,6 +5,7 @@ import 'package:instaclone/providers/profile_page_provider.dart';
 import 'package:instaclone/providers/search_page_provider.dart';
 import 'package:instaclone/screens/home_page/home_page_main.dart';
 import 'package:instaclone/screens/profile_page/profile_page.dart';
+import 'package:instaclone/screens/reels_page/Reel_page.dart';
 import 'package:instaclone/screens/reels_page/reels_page.dart';
 import 'package:instaclone/screens/search_page/search_page.dart';
 import 'package:instaclone/screens/shop_page/shop_page.dart';
@@ -113,7 +114,7 @@ class _MainPageState extends State<MainPage> {
             key: _reelsScreen,
             onGenerateRoute: (route) => MaterialPageRoute(
               settings: route,
-              builder: (context) => const ReelsPage(),
+              builder: (context) =>  ReelPage(),
             ),
           ),
           Navigator(
