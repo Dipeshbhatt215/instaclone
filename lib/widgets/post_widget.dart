@@ -25,7 +25,6 @@ class PostWidget extends StatefulWidget {
 class _PostWidgetState extends State<PostWidget> {
   final CarouselController _controller = CarouselController();
   int _current = 0;
-   bool isLikeAnimating = false;
 
   @override
   Widget build(BuildContext context) {
@@ -181,51 +180,33 @@ class _PostWidgetState extends State<PostWidget> {
                 children: [
                   Row(
                     children: [
-                     GestureDetector(
-            onDoubleTap: () {
-              FireStoreMethods().likePost(
-                widget.snap['postId'].toString(),
-                user.uid,
-                widget.snap['likes'],
-              );
-              setState(() {
-                isLikeAnimating = true;
-              });
-            },
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  width: double.infinity,
-                  child: Image.network(
-                    widget.snap['postUrl'].toString(),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                AnimatedOpacity(
-                  duration: const Duration(milliseconds: 200),
-                  opacity: isLikeAnimating ? 1 : 0,
-                  child: LikeAnimation(
-                    isAnimating: isLikeAnimating,
-                    child: const Icon(
-                      Icons.favorite,
-                      color: Colors.white,
-                      size: 100,
-                    ),
-                    duration: const Duration(
-                      milliseconds: 400,
-                    ),
-                    onEnd: () {
-                      setState(() {
-                        isLikeAnimating = false;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
+                      GestureDetector(
+                        child: SvgPicture.asset(
+                          widget.post.likes.contains(widget.post.userUUID) ? 'assets/icons/heart_filled.svg' : 'assets/icons/heart.svg',
+                          color: widget.post.likes.contains(widget.post.userUUID) ? ProjectConstants.redColor : primaryColor,
+                        ),
+                        onTap: () {
+                          try {
+                            setState(() {
+                              if (widget.post.likes.contains(widget.post.userUUID)) {
+                                widget.post.likes.remove(widget.post.userUUID);
+                              } else {
+                                widget.post.likes.add(widget.post.userUUID);
+                              }
+                            });
+                            context.read<PostsProvider>().writePost(widget.post);
+                          } catch (e) {
+                            setState(() {
+                              if (widget.post.likes.contains(widget.post.userUUID)) {
+                                widget.post.likes.remove(widget.post.userUUID);
+                              } else {
+                                widget.post.likes.add(widget.post.userUUID);
+                              }
+                              ProjectUtils.showSnackBarMessage(context, 'An unexpected error occured: $e');
+                            });
+                          }
+                        },
+                      ),
                       SizedBox(width: 14.w),
                       GestureDetector(
                         onTap: () => Navigator.push(
@@ -320,3 +301,4 @@ class _PostWidgetState extends State<PostWidget> {
     );
   }
 }
+

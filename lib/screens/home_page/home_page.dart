@@ -15,7 +15,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage> {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin<HomePage> {
   Future<void> getFollowingPosts() async {
     context.read<HomePageProvider>().getUserStream();
     context.read<HomePageProvider>().getPostsStreamForMainPage();
@@ -30,7 +31,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
   @override
   Widget build(BuildContext context) {
     Color primaryColor = ProjectConstants.getPrimaryColor(context, false);
-    Color primaryColorReversed = ProjectConstants.getPrimaryColor(context, true);
+    Color primaryColorReversed =
+        ProjectConstants.getPrimaryColor(context, true);
 
     var stream = context.watch<HomePageProvider>().postsStream;
 
@@ -53,22 +55,27 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
         elevation: 0,
         title: GestureDetector(
           onTap: () {
-            if (context.read<HomePageProvider>().mainPostsController.hasClients) {
-              context
-                  .read<HomePageProvider>()
-                  .mainPostsController
-                  .animateTo(0, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+            if (context
+                .read<HomePageProvider>()
+                .mainPostsController
+                .hasClients) {
+              context.read<HomePageProvider>().mainPostsController.animateTo(0,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeIn);
             }
           },
           child: SvgPicture.asset(
             "assets/icons/logo.svg",
-            color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
           ),
         ),
         actions: [
           IconButton(
             onPressed: () {
-              ProjectUtils.showBottomSheet(context, (context) => const AddSheet());
+              ProjectUtils.showBottomSheet(
+                  context, (context) => const AddSheet());
             },
             icon: SvgPicture.asset(
               'assets/icons/add.svg',
@@ -86,10 +93,9 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
           ),
           IconButton(
             onPressed: () {
-              context
-                  .read<HomePageProvider>()
-                  .pageController
-                  .animateToPage(1, duration: const Duration(milliseconds: 400), curve: Curves.ease);
+              context.read<HomePageProvider>().pageController.animateToPage(1,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.ease);
             },
             icon: SvgPicture.asset(
               'assets/icons/messenger.svg',
@@ -100,7 +106,12 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
         centerTitle: false,
       ),
       body: (stream == null)
-          ? (context.watch<HomePageProvider>().userModel != null && context.watch<HomePageProvider>().userModel!.following.isEmpty)
+          ? (context.watch<HomePageProvider>().userModel != null &&
+                  context
+                      .watch<HomePageProvider>()
+                      .userModel!
+                      .following
+                      .isEmpty)
               ? Container()
               : Center(
                   child: ProjectUtils.progressIndicator(primaryColor),
@@ -109,10 +120,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
               ? Container()
               : StreamBuilder<List<List<PostModel>>>(
                   stream: stream,
-                  builder: (BuildContext context, AsyncSnapshot<List<List<PostModel>>> list) {
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<List<PostModel>>> list) {
                     if (list.hasError) {
                       return const Center(
-                        child: Text('Something went wrong'),
+                        child: Text('Something went wrong in home page'),
                       );
                     }
 
@@ -130,7 +142,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                     }
 
                     return ListView(
-                      controller: context.read<HomePageProvider>().mainPostsController,
+                      controller:
+                          context.read<HomePageProvider>().mainPostsController,
                       children: postWidgets,
                     );
                   },

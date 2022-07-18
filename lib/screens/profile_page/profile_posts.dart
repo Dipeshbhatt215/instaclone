@@ -23,7 +23,8 @@ class _ProfilePostsState extends State<ProfilePosts> {
     var stream = context.watch<ProfilePageProvider>().userPostsStream;
 
     if (stream == null) {
-      Future.delayed(Duration.zero, (() => context.read<ProfilePageProvider>().getUserPostsStream()));
+      Future.delayed(Duration.zero,
+          (() => context.read<ProfilePageProvider>().getUserPostsStream()));
     }
 
     return stream == null
@@ -32,10 +33,11 @@ class _ProfilePostsState extends State<ProfilePosts> {
           )
         : StreamBuilder<List<PostModel>>(
             stream: stream,
-            builder: (BuildContext context, AsyncSnapshot<List<PostModel>> list) {
+            builder:
+                (BuildContext context, AsyncSnapshot<List<PostModel>> list) {
               if (list.hasError) {
                 return const Center(
-                  child: Text('Something went wrong'),
+                  child: Text('Something went wrong in post'),
                 );
               }
 
@@ -53,7 +55,11 @@ class _ProfilePostsState extends State<ProfilePosts> {
                 postImages.add(Material(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PostPage(postWidget: postWidget)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PostPage(postWidget: postWidget)));
                     },
                     highlightColor: Colors.black.withOpacity(0.2),
                     focusColor: Colors.black.withOpacity(0.2),
@@ -71,7 +77,9 @@ class _ProfilePostsState extends State<ProfilePosts> {
                 ));
               }
               Future.delayed(Duration.zero, () {
-                context.read<ProfilePageProvider>().setUserPostsCount(postImages.length);
+                context
+                    .read<ProfilePageProvider>()
+                    .setUserPostsCount(postImages.length);
               });
               return GridView.count(
                 crossAxisCount: 3,

@@ -47,7 +47,7 @@ class _ProfilePostsGeneralState extends State<ProfilePostsGeneral> {
             builder: (BuildContext context, AsyncSnapshot<List<PostModel>> list) {
               if (list.hasError) {
                 return const Center(
-                  child: Text('Something went wrong'),
+                  child: Text('Something went wrong '),
                 );
               }
 
