@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instaclone/screens/add_post_page/add_post_page.dart';
+import 'package:instaclone/screens/add_reel_page/add_reel_page.dart';
 import 'package:instaclone/utils/project_constants.dart';
 
 class AddSheet extends StatelessWidget {
@@ -43,6 +44,10 @@ class AddSheet extends StatelessWidget {
             'Reels',
             style: listTileTextStyle,
           ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const addReelPage()));
+          },
         ),
         ListTile(
           leading: const Icon(Icons.archive_outlined),
