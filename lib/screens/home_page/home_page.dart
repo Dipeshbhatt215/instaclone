@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage>
     super.build(context);
     return Scaffold(
       appBar: AppBar(
+        
         shape: Border(
           bottom: BorderSide(
             color: primaryColor.withOpacity(0.2),
@@ -103,6 +104,7 @@ class _HomePageState extends State<HomePage>
             ),
           ),
         ],
+     
         centerTitle: false,
       ),
       body: (stream == null)
