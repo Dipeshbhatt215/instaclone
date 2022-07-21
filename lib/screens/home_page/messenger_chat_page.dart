@@ -271,13 +271,11 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
                       minLines: 1,
                       maxLines: 2,
                       expands: false,
+                      
                       decoration: InputDecoration(
                         isDense: true,
-                        icon: ImageIcon(
-                          AssetImage("assets/images/camara.jpg",),
-                          size: 16
-
-                        ),
+                        
+                        prefixIcon: Icon(Icons.camera_alt_outlined,color: Colors.black,size:30),
                         hintText: 'Message',
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 16.0, horizontal: 26.0),
