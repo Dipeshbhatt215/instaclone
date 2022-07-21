@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instaclone/screens/add_story_page/flutter_instagram_stories.dart';
 import 'package:instaclone/screens/add_post_page/add_post_page.dart';
 import 'package:instaclone/screens/add_reel_page/add_reel_page.dart';
 import 'package:instaclone/utils/project_constants.dart';
@@ -46,7 +47,7 @@ class AddSheet extends StatelessWidget {
           ),
           onTap: () {
             Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const addReelPage()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => FlutterInstagramStories(collectionDbName: 'collectionDbName')));
           },
         ),
         ListTile(

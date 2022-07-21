@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Insta',
         useInheritedMediaQuery: true,
-        // TODO: THEME
+       
         theme: ThemeData(
           textSelectionTheme: const TextSelectionThemeData(
             cursorColor: Colors.grey,
