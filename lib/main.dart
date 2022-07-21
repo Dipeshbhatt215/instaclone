@@ -25,7 +25,8 @@ void main() async {
             create: (context) => AuthenticationService(FirebaseAuth.instance),
           ),
           StreamProvider(
-            create: (context) => context.read<AuthenticationService>().authStateChanges,
+            create: (context) =>
+                context.read<AuthenticationService>().authStateChanges,
             initialData: null,
           ),
         ],
@@ -66,57 +67,62 @@ class _RestartWidgetState extends State<RestartWidget> {
     );
   }
 }
+// ScreenUtilInit(
+//       designSize: const Size(375, 812),
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      builder: (context) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Insta',
-        useInheritedMediaQuery: true,
-       
-        theme: ThemeData(
-          textSelectionTheme: const TextSelectionThemeData(
-            cursorColor: Colors.grey,
+    return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Insta',
+          useInheritedMediaQuery: true,
+          theme: ThemeData(
+            textSelectionTheme: const TextSelectionThemeData(
+              cursorColor: Colors.grey,
+            ),
+            brightness: Brightness.light,
+            primaryColor: const Color.fromARGB(0, 0, 208, 255),
+            splashColor: Colors.grey,
+            highlightColor: Colors.grey,
+            colorScheme: ThemeData().colorScheme.copyWith(
+                  primary: const Color.fromARGB(0, 0, 208, 255),
+                  secondary: const Color.fromARGB(0, 0, 208, 255),
+                  brightness: Brightness.light,
+                ),
+            backgroundColor: Colors.white,
+            scaffoldBackgroundColor: Colors.white,
+            fontFamily: 'SF-UI-Display',
           ),
-          brightness: Brightness.light,
-          primaryColor: const Color.fromARGB(0, 0, 208, 255),
-          splashColor: Colors.grey,
-          highlightColor: Colors.grey,
-          colorScheme: ThemeData().colorScheme.copyWith(
-                primary: const Color.fromARGB(0, 0, 208, 255),
-                secondary: const Color.fromARGB(0, 0, 208, 255),
-                brightness: Brightness.light,
-              ),
-          backgroundColor: Colors.white,
-          scaffoldBackgroundColor: Colors.white,
-          fontFamily: 'SF-UI-Display',
-        ),
-        darkTheme: ThemeData(
-          textSelectionTheme: const TextSelectionThemeData(
-            cursorColor: Colors.grey,
+          darkTheme: ThemeData(
+            textSelectionTheme: const TextSelectionThemeData(
+              cursorColor: Colors.grey,
+            ),
+            highlightColor: Colors.grey,
+            brightness: Brightness.dark,
+            primaryColor: const Color.fromARGB(0, 0, 208, 255),
+            splashColor: Colors.grey,
+            colorScheme: ThemeData().colorScheme.copyWith(
+                  // primary: const Color.fromARGB(255, 19, 89, 146),
+                  // secondary: const Color.fromARGB(255, 19, 89, 146),
+                  primary: const Color.fromARGB(0, 0, 208, 255),
+                  secondary: const Color.fromARGB(0, 0, 208, 255),
+                  brightness: Brightness.dark,
+                ),
+            scaffoldBackgroundColor: const Color(0x000aa111),
+            fontFamily: 'SF-UI-Display',
           ),
-          highlightColor: Colors.grey,
-          brightness: Brightness.dark,
-          primaryColor: const Color.fromARGB(0, 0, 208, 255),
-          splashColor: Colors.grey,
-          colorScheme: ThemeData().colorScheme.copyWith(
-                // primary: const Color.fromARGB(255, 19, 89, 146),
-                // secondary: const Color.fromARGB(255, 19, 89, 146),
-                primary: const Color.fromARGB(0, 0, 208, 255),
-                secondary: const Color.fromARGB(0, 0, 208, 255),
-                brightness: Brightness.dark,
-              ),
-          scaffoldBackgroundColor: const Color(0x000aa111),
-          fontFamily: 'SF-UI-Display',
-        ),
-        themeMode: ThemeMode.system,
-        home: const AuthenticationWrapper(),
-      ),
-    );
+          themeMode: ThemeMode.system,
+          home: ScreenUtilInit(
+            designSize: const Size(375, 812),
+            builder: (context, snapshot) {
+              return const AuthenticationWrapper();
+            }
+          ),
+        );
+      //},
+    // );
   }
 }

@@ -46,10 +46,12 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    void showSnackbarMessage(String message) => ProjectUtils.showSnackBarMessage(context, message);
+    void showSnackbarMessage(String message) =>
+        ProjectUtils.showSnackBarMessage(context, message);
 
     Color primaryColor = ProjectConstants.getPrimaryColor(context, false);
-    Color primaryColorReversed = ProjectConstants.getPrimaryColor(context, true);
+    Color primaryColorReversed =
+        ProjectConstants.getPrimaryColor(context, true);
     var stream = context.watch<HomePageProvider>().specifiedChatStream;
 
     if (stream == null) {
@@ -78,7 +80,9 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
           );
 
           String chatTitleText;
-          if (snapshot.data == null || snapshot.data!.users == null || snapshot.data!.users!.isEmpty) {
+          if (snapshot.data == null ||
+              snapshot.data!.users == null ||
+              snapshot.data!.users!.isEmpty) {
             chatTitleText = 'Unnamed chat room';
           } else if (snapshot.data!.users!.length == 1) {
             chatTitleText = snapshot.data!.users!.first.name;
@@ -92,7 +96,8 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
 
           //triggerScrollToBottom();
           return GestureDetector(
-            onTap: () => WidgetsBinding.instance.focusManager.primaryFocus?.unfocus(),
+            onTap: () =>
+                WidgetsBinding.instance.focusManager.primaryFocus?.unfocus(),
             child: Scaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: true,
@@ -106,7 +111,9 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ProjectUtils.profilePictureAvatar(
-                      (snapshot.data == null || snapshot.data!.users == null || snapshot.data!.users!.isEmpty)
+                      (snapshot.data == null ||
+                              snapshot.data!.users == null ||
+                              snapshot.data!.users!.isEmpty)
                           ? ''
                           : snapshot.data!.users![0].profilePic,
                       16,
@@ -137,7 +144,11 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
                       itemCount: snapshot.data?.messages.length,
                       itemBuilder: ((context, index) {
                         MessageModel? message = snapshot.data?.messages[index];
-                        bool isMe = message?.senderUUID == context.read<HomePageProvider>().userModel?.userUUID;
+                        bool isMe = message?.senderUUID ==
+                            context
+                                .read<HomePageProvider>()
+                                .userModel
+                                ?.userUUID;
 
                         List<Widget> widgets = [];
                         if (index == 0) {
@@ -151,15 +162,20 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
                               child: Center(
                                 child: Text(
                                   dateString,
-                                  style: ProjectConstants.chatMessagesDateTextStyle(context),
+                                  style: ProjectConstants
+                                      .chatMessagesDateTextStyle(context),
                                 ),
                               ),
                             ),
                           );
                         } else {
                           DateTime date1 = message!.timestamp.toDate();
-                          DateTime date2 = snapshot.data!.messages[index - 1].timestamp.toDate();
-                          int diffInSeconds = ProjectUtils.timeDifferenceInSeconds(date1, date2);
+                          DateTime date2 = snapshot
+                              .data!.messages[index - 1].timestamp
+                              .toDate();
+                          int diffInSeconds =
+                              ProjectUtils.timeDifferenceInSeconds(
+                                  date1, date2);
                           if (diffInSeconds > 60) {
                             String dateString = ProjectUtils.isDateToday(date1)
                                 ? ProjectUtils.dateTimeToString(date1)
@@ -182,16 +198,21 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
                         }
                         UserModel? user = isMe
                             ? context.read<HomePageProvider>().userModel
-                            : snapshot.data?.users?.firstWhere((element) => element.userUUID == message.senderUUID);
+                            : snapshot.data?.users?.firstWhere((element) =>
+                                element.userUUID == message.senderUUID);
                         if (isMe) {
                           widgets.add(
                             Align(
-                              alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                              alignment: isMe
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 2.0),
                                 child: Material(
                                   elevation: 0,
-                                  borderRadius: const BorderRadius.all(Radius.circular(22.0)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(22.0)),
                                   color: ProjectConstants.blueColor,
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
@@ -208,13 +229,16 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  ProjectUtils.profilePictureAvatar(user == null ? '' : user.profilePic, 16),
+                                  ProjectUtils.profilePictureAvatar(
+                                      user == null ? '' : user.profilePic, 16),
                                   Flexible(
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0, vertical: 2.0),
                                       child: Material(
                                         elevation: 0,
-                                        borderRadius: const BorderRadius.all(Radius.circular(22.0)),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(22.0)),
                                         color: primaryColor.withOpacity(0.15),
                                         child: Padding(
                                           padding: const EdgeInsets.all(12.0),
@@ -249,8 +273,14 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
                       expands: false,
                       decoration: InputDecoration(
                         isDense: true,
+                        icon: ImageIcon(
+                          AssetImage("assets/images/camara.jpg",),
+                          size: 16
+
+                        ),
                         hintText: 'Message',
-                        contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 26.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 26.0),
                         hintStyle: const TextStyle(color: Colors.grey),
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(24.0)),
@@ -269,11 +299,16 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
                             snapshot.data?.messages.add(
                               MessageModel(
                                 message: userMessageText,
-                                senderUUID: context.read<HomePageProvider>().userModel?.userUUID as String,
+                                senderUUID: context
+                                    .read<HomePageProvider>()
+                                    .userModel
+                                    ?.userUUID as String,
                                 timestamp: Timestamp.now(),
                               ),
                             );
-                            bool response = await context.read<HomePageProvider>().writeToChatModel(snapshot.data!);
+                            bool response = await context
+                                .read<HomePageProvider>()
+                                .writeToChatModel(snapshot.data!);
                             if (!response) {
                               showSnackbarMessage('Failed to send message');
                             } else {
@@ -285,7 +320,9 @@ class _MessengerChatPageState extends State<MessengerChatPage> {
                           child: Text(
                             'Send  ',
                             style: TextStyle(
-                              color: userMessageText == '' ? ProjectConstants.blueColor.withAlpha(100) : ProjectConstants.blueColor,
+                              color: userMessageText == ''
+                                  ? ProjectConstants.blueColor.withAlpha(100)
+                                  : ProjectConstants.blueColor,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
