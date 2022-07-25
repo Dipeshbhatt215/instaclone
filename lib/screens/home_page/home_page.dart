@@ -108,49 +108,51 @@ class _HomePageState extends State<HomePage>
       ),
       body: 
        
-              // ListView.builder(
-              //   itemCount: 7,
-              //   shrinkWrap: true,
-              //   scrollDirection: Axis.horizontal,
-              //   itemBuilder: (context, index) => Padding(
-              //     padding: const EdgeInsets.only(right: 8,bottom: 1),
-              //     child: Column(
-              //       children: [
-              //         GestureDetector(
-              //           onTap: () {
-              //             // Navigator.push(
-              //             //   context,
-              //             //   MaterialPageRoute(
-              //             //       builder: (context) => Storyview()),
-              //             // );
-              //           },
-              //           child: Container(
-              //             height: 60.h,
-              //             width: 60.w,
-              //             decoration: BoxDecoration(
-              //               color: Color(0xff755DD7),
-              //               shape: BoxShape.circle,
-              //               // image: DecorationImage(
-              //               //   image: AssetImage(storyList[index]),
-              //               //   fit: BoxFit.cover,
-              //             ),
-              //           ),
-              //         ),
-              //         Text(
-              //           'story',
-              //           style: TextStyle(
-              //             fontSize: 15,
-              //             overflow: TextOverflow.ellipsis,
-              //           ),
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
-           
-         
-         
-          (stream == null)
+              Column(
+                children: [
+                  Container(
+                    height: 100.w,
+                    child: ListView.builder(
+                      itemCount: 7,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.only(right: 8,bottom: 1),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => Storyview()),
+                                // );
+                              },
+                              child: Container(
+                                height: 60.h,
+                                width: 60.w,
+                                decoration: BoxDecoration(
+                                  color: Color(0xff755DD7),
+                                  shape: BoxShape.circle,
+                                  // image: DecorationImage(
+                                  //   image: AssetImage(storyList[index]),
+                                  //   fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              'story',
+                              style: TextStyle(
+                                fontSize: 15,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                   (stream == null)
               ? (context.watch<HomePageProvider>().userModel != null &&
                       context
                           .watch<HomePageProvider>()
@@ -193,6 +195,12 @@ class _HomePageState extends State<HomePage>
                         );
                       },
                     ),
+                ],
+              ),
+           
+         
+         
+         
      
     );
   }
