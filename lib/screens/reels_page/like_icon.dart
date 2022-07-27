@@ -13,7 +13,7 @@ class LikeIcon extends StatelessWidget {
         future: tempFuture(),
         builder: (context, snapshot) =>
             snapshot.connectionState != ConnectionState.done
-                ? Icon(Icons.favorite, size: 110)
+                ? Icon(Icons.favorite, size: 100,color: Colors.white)
                 : SizedBox(),
       ),
     );
