@@ -10,8 +10,10 @@ class ShopPage extends StatefulWidget {
 class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "Shop",
+    return Center(
+      child: const Text(
+        "Shop",
+      ),
     );
   }
 }

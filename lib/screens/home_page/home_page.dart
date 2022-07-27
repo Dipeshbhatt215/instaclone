@@ -106,102 +106,106 @@ class _HomePageState extends State<HomePage>
         ],
         centerTitle: false,
       ),
-      body: 
-       
-              Column(
-                children: [
-                  Container(
-                    height: 100.w,
-                    child: ListView.builder(
-                      itemCount: 7,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.only(right: 8,bottom: 1),
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => Storyview()),
-                                // );
-                              },
-                              child: Container(
-                                height: 60.h,
-                                width: 60.w,
-                                decoration: BoxDecoration(
-                                  color: Color(0xff755DD7),
-                                  shape: BoxShape.circle,
-                                  // image: DecorationImage(
-                                  //   image: AssetImage(storyList[index]),
-                                  //   fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'story',
-                              style: TextStyle(
-                                fontSize: 15,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+      body: Container(
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+        SizedBox(
+          height: 80.h,
+          child: ListView.builder(
+            itemCount: 10,
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => Padding(
+          padding: const EdgeInsets.only(right: 8, bottom: 1),
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => Storyview()),
+                  // );
+                },
+                child: Container(
+                  height: 60.h,
+                  width: 60.w,
+                  decoration: BoxDecoration(
+                    color: Color(0xff755DD7),
+                    shape: BoxShape.circle,
+                    // image: DecorationImage(
+                    //   image: AssetImage(storyList[index]),
+                    //   fit: BoxFit.cover,
                   ),
-                   (stream == null)
-              ? (context.watch<HomePageProvider>().userModel != null &&
-                      context
-                          .watch<HomePageProvider>()
-                          .userModel!
-                          .following
-                          .isEmpty)
-                  ? Container()
-                  : Center(
-                      child: ProjectUtils.progressIndicator(primaryColor),
-                    )
-              : (context.watch<HomePageProvider>().userModel!.following.isEmpty)
-                  ? Container()
-                  : StreamBuilder<List<List<PostModel>>>(
-                      stream: stream,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<List<List<PostModel>>> list) {
-                        if (list.hasError) {
-                          return const Center(
-                            child: Text('Something went wrong in home page'),
-                          );
-                        }
-          
-                        if (list.connectionState == ConnectionState.waiting) {
-                          return Center(
-                            child: ProjectUtils.progressIndicator(primaryColor),
-                          );
-                        }
-          
-                        var data = list.data![0];
-          
-                        List<Widget> postWidgets = [];
-                        for (var post in data) {
-                          postWidgets.add(PostWidget(post: post));
-                        }
-          
-                        return ListView(
-                          controller:
-                              context.read<HomePageProvider>().mainPostsController,
-                          children: postWidgets,
-                        );
-                      },
-                    ),
-                ],
+                ),
               ),
-           
-         
-         
-         
-     
+              Text(
+                'Story',
+                style: TextStyle(
+                  fontSize: 15,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              )
+            ],
+          ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        (stream == null)
+          ? (context.watch<HomePageProvider>().userModel != null &&
+              context
+                  .watch<HomePageProvider>()
+                  .userModel!
+                  .following
+                  .isEmpty)
+          ? Container()
+          : Center(
+              child: ProjectUtils.progressIndicator(primaryColor),
+            )
+          : (context
+              .watch<HomePageProvider>()
+              .userModel!
+              .following
+              .isEmpty)
+          ? Container()
+          : StreamBuilder<List<List<PostModel>>>(
+              stream: stream,
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<List<PostModel>>> list) {
+                if (list.hasError) {
+                  return const Center(
+                    child:
+                        Text('Something went wrong in home page'),
+                  );
+                }
+
+                if (list.connectionState ==
+                    ConnectionState.waiting) {
+                  return Center(
+                    child: ProjectUtils.progressIndicator(
+                        primaryColor),
+                  );
+                }
+
+                var data = list.data![0];
+
+                List<Widget> postWidgets = [];
+                for (var post in data) {
+                  postWidgets.add(PostWidget(post: post));
+                }
+
+                return ListView(
+                  controller: context
+                      .read<HomePageProvider>()
+                      .mainPostsController,
+                  children: postWidgets,
+                );
+              },
+            ),
+        
+      ])),
     );
   }
 

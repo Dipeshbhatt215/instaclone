@@ -72,7 +72,9 @@ class _PostCommentsWidgetState extends State<PostCommentsWidget> {
             ),
           );
         } catch (e) {
+          // ignore: todo
           // TODO : URGENT
+          // ignore: todo
           // TODO : HANDLE UNEXPECTED USER NOT FOUND ERROR
         }
       }
@@ -100,6 +102,7 @@ class _PostCommentsWidgetState extends State<PostCommentsWidget> {
         actions: [
           IconButton(
             onPressed: () {
+              // ignore: todo
               // TODO : IMPLEMENT SHARE POST SCREEN
             },
             icon: SvgPicture.asset(
@@ -133,6 +136,7 @@ class _PostCommentsWidgetState extends State<PostCommentsWidget> {
                               WidgetSpan(
                                 child: GestureDetector(
                                   onTap: () {
+                                    // ignore: todo
                                     // TODO : IMPLEMENT GO THE PROFILE
                                   },
                                   child: Text(

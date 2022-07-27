@@ -30,7 +30,9 @@ class PostsProvider with ChangeNotifier {
   }
 
   Future<String> uploadImage(XFile image) async {
+    // ignore: todo
     // TODO : URGENT
+    // ignore: todo
     // TODO : ADD RANDOM UID
     String filePath = 'postPics/${image.path.split("/").last}';
     TaskSnapshot uploadTask = await firebase_storage.FirebaseStorage.instance.ref(filePath).putFile(File(image.path));
