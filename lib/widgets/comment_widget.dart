@@ -9,7 +9,7 @@ import 'package:instaclone/widgets/duration_timer_widget.dart';
 class CommentWidget extends StatefulWidget {
   final CommentModel commentModel;
   final Map<String, dynamic>? userModel;
-  const CommentWidget({Key? key, required this.commentModel, required this.userModel}) : super(key: key);
+  const CommentWidget({Key? key, required this.commentModel, required this.userModel, required String message}) : super(key: key);
 
   @override
   State<CommentWidget> createState() => _CommentWidgetState();

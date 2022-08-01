@@ -68,7 +68,7 @@ class _PostCommentsWidgetState extends State<PostCommentsWidget> {
           comments.add(
             CommentWidget(
               commentModel: comment,
-              userModel: getUserFromUsers(comment.userUUID),
+              userModel: getUserFromUsers(comment.userUUID), message: '',
             ),
           );
         } catch (e) {
